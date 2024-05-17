@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h2>Dashboard</h2>
+    <RouterLink to="/cars">Carros</RouterLink>
+    <RouterLink to="/owners">Proprietários</RouterLink>
   </div>
+  asdasd
 </template>
 
 <script setup></script>
