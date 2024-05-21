@@ -8,4 +8,10 @@
 import TopBar from './components/TopBar.vue'
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  min-width: 90vw;
+}
+</style>

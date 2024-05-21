@@ -1,9 +1,10 @@
 <template>
   <div>
-    <RouterLink to="/cars">Carros</RouterLink>
-    <RouterLink to="/owners">Proprietários</RouterLink>
+    <RouterLink to="/cars/list">Exibir carros</RouterLink>
+    <RouterLink to="/cars/new">Adicionar carro</RouterLink>
+    <RouterLink to="/owners/list">Exibir donos</RouterLink>
+    <RouterLink to="/owners/new">Adicionar dono</RouterLink>
   </div>
-  asdasd
 </template>
 
 <script setup></script>

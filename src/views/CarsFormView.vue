@@ -1,37 +1,15 @@
 <template>
   <div>
     <div class="buttons">
-      <button @click="showCars = !showCars">Exibir carros</button>
-      <button @click="newCar = !newCar">Adicionar carro</button>
+      <RouterLink to="/cars/list">Exibir carros</RouterLink>
     </div>
-    <div v-if="showCars">
-      <table>
-        <thead>
-          <tr>
-            <th>Modelo</th>
-            <th>Marca</th>
-            <th>Placa</th>
-            <th>Ano</th>
-            <th>Cor</th>
-            <th>Número do chassi</th>
-            <th>Número do motor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="car in cars.value" :key="car.id">
-            <td>{{ car.model }}</td>
-            <td>{{ car.brand }}</td>
-            <td>{{ car.license_plate }}</td>
-            <td>{{ car.year }}</td>
-            <td>{{ car.color }}</td>
-            <td>{{ car.chassis_number }}</td>
-            <td>{{ car.engine_number }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div v-if="newCar" class="card">
+    <div class="card">
       <form @submit.prevent="store">
+        <select>
+          <option v-for="owner in owners.value" :key="owner.id" :value="owner.id">
+            {{ owner.name }}
+          </option>
+        </select>
         <input required v-model="car.model" type="text" placeholder="Modelo" />
         <input required v-model="car.brand" type="text" placeholder="Marca" />
         <input required v-model="car.license_plate" type="text" placeholder="Placa" />
@@ -66,18 +44,37 @@ const car = reactive({
   type: null
 })
 
+const owners = reactive([])
+
 const errorMessage = ref('')
 const newCar = ref('')
 const showCars = ref('')
 
 onMounted(async () => {
+  fetchOwners().then((response) => {
+    console.log(response.data)
+    owners.value = response.data
+  })
+  fetchCars()
+  console.log(owners)
+})
+
+async function fetchCars() {
   try {
     const { data } = await http.get('/cars')
     cars.value = data
   } catch (error) {
     console.log(error)
   }
-})
+}
+
+async function fetchOwners() {
+  try {
+    return await http.get('/owners')
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const store = async () => {
   try {
@@ -197,5 +194,30 @@ td {
 
 th {
   font-weight: bold;
+}
+
+select {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #181818;
+  border: 1px solid #191919;
+  border-radius: 5px;
+  color: white;
+  color: #7e7e7e;
+
+  font-size: 16px;
+  transition: border-color 0.3s;
+  width: 100%;
+  max-width: 100%;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+option {
+  background-color: #181818;
+  color: white;
 }
 </style>

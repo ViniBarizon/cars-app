@@ -2,8 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
-import CarsView from "../views/CarsView.vue";
-import OwnersView from "../views/OwnersView.vue";
+import CarsListView from "../views/CarsListView.vue";
+import CarsFormView from "../views/CarsFormView.vue";
+import CarsEditView from "../views/CarsEditView.vue";
+import OwnersListView from "../views/OwnersListView.vue";
+import OwnersFormView from "../views/OwnersFormView.vue";
+import OwnersEditView from "../views/OwnersEditView.vue";
 import RegisterView from "../views/RegisterView.vue";
 
 const router = createRouter({
@@ -25,14 +29,34 @@ const router = createRouter({
       component: DashboardView,
     },
     {
-      path: "/cars",
-      name: "cars",
-      component: CarsView,
+      path: "/cars/list",
+      name: "cars-list",
+      component: CarsListView,
     },
     {
-      path: "/owners",
-      name: "owners",
-      component: OwnersView,
+      path: "/cars/new",
+      name: "cars-new",
+      component: CarsFormView,
+    },
+    {
+      path: "/cars/edit/:carId",
+      name: "cars-edit",
+      component: CarsEditView,
+    },
+    {
+      path: "/owners/list",
+      name: "owners-list",
+      component: OwnersListView,
+    },
+    {
+      path: "/owners/new",
+      name: "owners-new",
+      component: OwnersFormView,
+    },
+    {
+      path: "/owners/edit/:ownerId",
+      name: "owners-edit",
+      component: OwnersEditView,
     },
     {
       path: "/register",
