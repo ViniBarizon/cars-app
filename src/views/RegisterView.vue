@@ -1,13 +1,14 @@
 <template>
   <div class="card">
-    <form @submit.prevent="login">
+    <form @submit.prevent="register">
+      <input v-model="user.name" type="text" placeholder="Seu nome" />
       <input v-model="user.email" type="text" placeholder="Seu email" />
       <input v-model="user.password" type="password" placeholder="Sua senha" />
-      <input v-model="user.confirmPassword" type="password" placeholder="Confirme sua senha" />
+      <input v-model="user.confirm_password" type="password" placeholder="Confirme sua senha" />
       <p class="form-error">
         {{ errorMessage }}
       </p>
-      <button type="submit">Login</button>
+      <button type="submit">Registrar</button>
     </form>
   </div>
 </template>
@@ -18,17 +19,18 @@ import http from '@/services/http.ts'
 import { userStore } from '@/stores/userStore.ts'
 import { useRouter } from 'vue-router'
 const user = reactive({
+  name: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirm_password: ''
 })
 
 const errorMessage = ref('')
 const router = useRouter()
 
-const login = async () => {
+const register = async () => {
   try {
-    const { data } = await http.post('/auth/login', user)
+    const { data } = await http.post('/auth/register', user)
     const userStoreInstance = userStore()
     userStoreInstance.store(data.user)
     localStorage.setItem('token', data.token)

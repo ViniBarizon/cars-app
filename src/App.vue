@@ -1,13 +1,17 @@
 <template>
-  <header>
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/login">Login</RouterLink>
-    <RouterLink to="/dashboard">Dashboard</RouterLink>
-  </header>
+  <TopBar />
 
   <RouterView />
 </template>
 
-<script setup></script>
+<script setup>
+import TopBar from './components/TopBar.vue'
+</script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  min-width: 90vw;
+}
+</style>
