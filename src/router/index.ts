@@ -4,6 +4,7 @@ import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import CarsView from "../views/CarsView.vue";
 import OwnersView from "../views/OwnersView.vue";
+import RegisterView from "../views/RegisterView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,18 +34,24 @@ const router = createRouter({
       name: "owners",
       component: OwnersView,
     },
+    {
+      path: "/register",
+      name: "register",
+      component: RegisterView,
+    },
   ],
 });
 
 router.beforeEach((to, from, next) => {
   if (
     to.name !== "login" &&
+    to.name !== "register" &&
     !localStorage.getItem("token") &&
     !localStorage.getItem("user")
   ) {
     next({ name: "login" });
   } else if (
-    to.name === "login" &&
+    (to.name === "login" || to.name === "register") &&
     localStorage.getItem("token") &&
     localStorage.getItem("user")
   ) {

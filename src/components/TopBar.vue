@@ -9,6 +9,7 @@
         <RouterLink to="/login" v-on="{ click: logout }" v-if="!token" class="topbar-link">
           <button class="topbar-link">Login</button>
         </RouterLink>
+        <RouterLink to="/register" v-if="!token" class="topbar-link">Registrar</RouterLink>
         <button class="topbar-link" v-if="token" @click="logout">Logout</button>
       </div>
     </header>
@@ -39,9 +40,15 @@ header {
   left: 0;
   display: flex;
   justify-content: space-between;
+  gap: 30px;
   background-color: #1d1d1d;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header div {
+  display: flex;
+  gap: 10px;
 }
 
 button {
